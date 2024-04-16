@@ -26,6 +26,7 @@ export class Sistema2Component {
   }
 
   Multiplicar() {
+
     this.resultado = [];
     for (let i = 0; i < this.numero1; i++) {
       this.resultado.push([]);
@@ -38,4 +39,6 @@ export class Sistema2Component {
   atualizarMatriz(matriz: number[][]) {
     this.matriz = matriz;
   }
+
+
 }
