@@ -6,7 +6,7 @@
     </tr>
     <tr *ngFor="let row of matriz; let i = index">
       <td *ngFor="let col of row; let j = index">
-        <input type="text" [(ngModel)]="matriz[i][j]" (change)="atualizarValor($event, i, j)" [readonly]="readonly">
+        <input type="text" [value]="matriz[i][j]" (change)="atualizarValor($event, i, j)" [readonly]="readonly">
       </td>
     </tr>
 
