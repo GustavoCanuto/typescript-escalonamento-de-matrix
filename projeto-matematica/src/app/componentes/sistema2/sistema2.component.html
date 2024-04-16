@@ -1,43 +1,25 @@
-<h2>Matrix Calculator</h2>
+<h2>Soma de um escalar por uma Matrix</h2>
 
 <div>
   <label for="linha">Linhas:</label>
   <input type="number" id="numero1" [(ngModel)]="numero1" >
-</div>
-<div>
+
   <label for="coluna">Colunas:</label>
   <input type="number" id="numero2" [(ngModel)]="numero2" >
 </div>
+<br>
 <button (click)="GerarMatrix()">Gerar Matrix</button>
 
-<div *ngIf="matriz.length > 0">
-  <table>
-    <tr *ngFor="let row of matriz; let i = index">
-      <td *ngFor="let col of row; let j = index">
-        <input type="number" [(ngModel)]="matriz[i][j]">
-      </td>
-    </tr>
-  </table>
+<app-gerador-matrix [matriz]="matriz" (matrizChange)="atualizarMatriz($event)"></app-gerador-matrix>
 
+<div *ngIf="matriz.length > 0 && mostrarEscalar">
   <div>
-    <label for="escalar">Escalar:</label>
+    <p class="vezes">X</p>
+    <label for="escalar" >Escalar:</label>
     <input type="number" id="escalar" [(ngModel)]="escalar">
   </div>
+  <br>
   <button (click)="Multiplicar()">Multiplicar por um escalar</button>
 </div>
 
-<div *ngIf="resultado !== undefined">
-
-  <table>
-    <caption>Resultado:</caption>
-    <tr *ngFor="let row of resultado; let i = index">
-      <th *ngFor="let col of row; let j = index">
-      </th>
-    </tr>
-    <tr *ngFor="let row of resultado; let i = index">
-      <td *ngFor="let col of row; let j = index">
-        <input type="text" readonly value="{{ resultado[i][j] }}" />
-      </td>
-    </tr>
-  </table>
-</div>
+<app-gerador-matrix [matriz]="resultado" [readonly]="true"></app-gerador-matrix>

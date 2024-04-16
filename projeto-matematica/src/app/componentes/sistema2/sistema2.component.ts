@@ -3,14 +3,16 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-sistema2',
   templateUrl: './sistema2.component.html',
-  styleUrl: './sistema2.component.css'
+  styleUrls: ['./sistema2.component.css']
 })
 export class Sistema2Component {
   numero1: number = 0;
   numero2: number = 0;
-  matriz: number[][] = [];
+  matriz: number[][] = [[]];
   escalar: number = 0;
   resultado: number[][] = [];
+  mostrarEscalar: boolean = false; // variável para controlar a visibilidade
+
 
   GerarMatrix() {
     this.matriz = [];
@@ -20,17 +22,20 @@ export class Sistema2Component {
         this.matriz[i].push(0);
       }
     }
+    this.mostrarEscalar = true; // torna visível após gerar a matriz
   }
 
   Multiplicar() {
-    const resultMatrix: number[][] = [];
+    this.resultado = [];
     for (let i = 0; i < this.numero1; i++) {
-      resultMatrix.push([]);
+      this.resultado.push([]);
       for (let j = 0; j < this.numero2; j++) {
-        resultMatrix[i].push(this.matriz[i][j] * this.escalar);
+        this.resultado[i].push(this.matriz[i][j] * this.escalar);
       }
     }
-    this.resultado = resultMatrix;
   }
 
+  atualizarMatriz(matriz: number[][]) {
+    this.matriz = matriz;
+  }
 }

@@ -1,0 +1,13 @@
+<div *ngIf="matriz.length > 0">
+  <table>
+    <caption></caption>
+    <tr>
+      <th></th>
+    </tr>
+    <tr *ngFor="let row of matriz; let i = index">
+      <td *ngFor="let col of row; let j = index">
+        <input type="number" [(ngModel)]="matriz[i][j]" [readonly]="readonly">
+      </td>
+    </tr>
+  </table>
+</div>
