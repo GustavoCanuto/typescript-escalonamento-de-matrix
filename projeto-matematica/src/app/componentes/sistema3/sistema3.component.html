@@ -44,9 +44,10 @@
     <input type="number" id="numero2" [(ngModel)]="numero2">
   </div>
   <div>
-    <button (click)="somar()">Somar</button>
+    <button (click)="MetodoDeGauss()">Somar</button>
   </div>
   <div>
     <p>Resultado: {{ resultado }}</p>
   </div>
+  <app-gerador-matrix [matriz]="matrizTeste" [readonly]="true"></app-gerador-matrix>
 
