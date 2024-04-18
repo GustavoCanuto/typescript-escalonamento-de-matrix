@@ -12,7 +12,11 @@ export class GeradorMatrixComponent {
 
   atualizarValor(event: Event, rowIndex: number, colIndex: number) {
     const input = event.target as HTMLInputElement;
-    const valor = input.value.trim(); // Obter valor do input
+   let valor = parseFloat(input.value.trim()); // Obter valor do input
+    if (isNaN(valor)) {
+      valor = 0;
+  }
+
     const novaMatriz = this.matriz.map((row, i) => {
       if (i === rowIndex) {
         return row.map((col, j) => (j === colIndex ? valor : col));
