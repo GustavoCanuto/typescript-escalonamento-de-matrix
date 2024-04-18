@@ -1,157 +1,19 @@
-
-    <div id="container">
-        <h2>Somador e Multiplicador de Matrizes</h2>
-        <div>
-            <label for="linhas">Linhas:</label>
-            <input type="number" id="rows" placeholder="Número de Linhas" min="1">
-            <label for="columns">Colunas:</label>
-            <input type="number" id="columns" placeholder="Número de Colunas" min="1">
-            <button onclick="criarInputsMatriz()">Definir tamanho</button>
-        </div>
-        <form id="matrixForm" onsubmit="processarMatrizes(event)">
-            <!-- Inputs das matrizes serão gerados aqui -->
-        </form>
-        <div id="matrixOperation" style="display: none;">
-            <button onclick="somarMatrizes()">Somar Matrizes</button>
-            <button onclick="multiplicarMatrizes()">Multiplicar Matrizes</button>
-        </div>
-        <h3>Resultado:</h3>
-        <div id="result"></div>
-
-    </div>
-
-    <script>
-        let matriz1 = [];
-        let matriz2 = [];
-        let linhas, colunas;
-
-        function criarInputsMatriz() {
-            linhas = parseInt(document.getElementById('rows').value);
-            colunas = parseInt(document.getElementById('columns').value);
-            const formulario = document.getElementById('matrixForm');
-            formulario.innerHTML = '';
-
-            for (let i = 0; i < 2; i++) {
-                const tituloMatriz = document.createElement('h4');
-                tituloMatriz.textContent = `Matriz ${i + 1}`;
-                formulario.appendChild(tituloMatriz);
-                const divMatriz = document.createElement('div');
-                divMatriz.id = `matriz${i + 1}`;
-                for (let r = 0; r < linhas; r++) {
-                    for (let c = 0; c < colunas; c++) {
-                        const input = document.createElement('input');
-                        input.type = 'number';
-                        input.id = `m${i + 1}${r}${c}`;
-                        input.placeholder = `M${i + 1}[${r}][${c}]`;
-                        // Autopreenchimento com zero se o campo estiver vazio
-                        input.value = 0;
-                        divMatriz.appendChild(input);
-                    }
-                    divMatriz.appendChild(document.createElement('br'));
-                }
-                formulario.appendChild(divMatriz);
-            }
-            document.getElementById('matrixOperation').style.display = 'block';
-        }
-
-        function obterMatriz(idMatriz) {
-            const matriz = [];
-            for (let r = 0; r < linhas; r++) {
-                const linha = [];
-                for (let c = 0; c < colunas; c++) {
-                    const valor = parseFloat(document.getElementById(`${idMatriz}${r}${c}`).value);
-                    // Se o campo estiver vazio ou não for um número válido, definir como 0
-                    linha.push(isNaN(valor) ? 0 : valor);
-                }
-                matriz.push(linha);
-            }
-            return matriz;
-        }
-
-        function validarMatrizesPreenchidas() {
-            for (let r = 0; r < linhas; r++) {
-                for (let c = 0; c < colunas; c++) {
-                    const valorMatriz1 = parseFloat(document.getElementById(`m1${r}${c}`).value);
-                    const valorMatriz2 = parseFloat(document.getElementById(`m2${r}${c}`).value);
-                    if (isNaN(valorMatriz1) || isNaN(valorMatriz2)) {
-                        alert('Por favor, preencha todos os campos das matrizes com valores numéricos.');
-                        return false; // Retorna falso se houver campos não preenchidos
-                    }
-                }
-            }
-            return true; // Retorna verdadeiro se todas as matrizes estiverem preenchidas
-        }
-
-        function somarMatrizes() {
-            if (!validarMatrizesPreenchidas()) {
-                return; // Interrompe a operação se as matrizes não estiverem completamente preenchidas
-            }
-
-            matriz1 = obterMatriz('m1');
-            matriz2 = obterMatriz('m2');
-            const resultadoMatriz = [];
-            for (let r = 0; r < linhas; r++) {
-                const linha = [];
-                for (let c = 0; c < colunas; c++) {
-                    linha.push(matriz1[r][c] + matriz2[r][c]);
-                }
-                resultadoMatriz.push(linha);
-            }
-            exibirResultado(resultadoMatriz);
-        }
-
-        function multiplicarMatrizes() {
-            if (!validarMatrizesPreenchidas()) {
-                return; // Interrompe a operação se as matrizes não estiverem completamente preenchidas
-            }
-
-            matriz1 = obterMatriz('m1');
-            matriz2 = obterMatriz('m2');
-            const resultadoMatriz = [];
-            for (let r = 0; r < linhas; r++) {
-                const linha = [];
-                for (let c = 0; c < colunas; c++) {
-                    let soma = 0;
-                    for (let k = 0; k < colunas; k++) {
-                        soma += matriz1[r][k] * matriz2[k][c];
-                    }
-                    linha.push(soma);
-                }
-                resultadoMatriz.push(linha);
-            }
-            exibirResultado(resultadoMatriz);
-        }
-
-        function exibirResultado(matriz) {
-            const divResultado = document.getElementById('result');
-            divResultado.innerHTML = '';
-
-            matriz.forEach(row => {
-                const rowDiv = document.createElement('div');
-                rowDiv.classList.add('row');
-
-                row.forEach(value => {
-                    const cellDiv = document.createElement('div');
-                    cellDiv.classList.add('cell');
-                    cellDiv.textContent = value;
-                    rowDiv.appendChild(cellDiv);
-                });
-
-                divResultado.appendChild(rowDiv);
-            });
-        }
-
-        function processarMatrizes(evento) {
-            evento.preventDefault();
-        }
-    </script>
-
-
-
-
-
-
-
-
-
-
+<div id="container">
+  <h2>Somador e Multiplicador de Matrizes</h2>
+  <div>
+      <label for="linhas">Linhas:</label>
+      <input type="number" id="rows" placeholder="Número de Linhas" min="1">
+      <label for="columns">Colunas:</label>
+      <input type="number" id="columns" placeholder="Número de Colunas" min="1">
+      <button (click)="criarInputsMatriz()">Definir tamanho</button>
+  </div>
+  <form id="matrixForm" (ngSubmit)="processarMatrizes($event)">
+      <!-- Inputs das matrizes serão gerados aqui -->
+  </form>
+  <div id="matrixOperation" style="display: none;">
+      <button (click)="somarMatrizes()">Somar Matrizes</button>
+      <button (click)="multiplicarMatrizes()">Multiplicar Matrizes</button>
+  </div>
+  <h3>Resultado:</h3>
+  <div id="result"></div>
+</div>
