@@ -11,7 +11,7 @@ describe('Sistema1Component', () => {
       declarations: [Sistema1Component]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(Sistema1Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
