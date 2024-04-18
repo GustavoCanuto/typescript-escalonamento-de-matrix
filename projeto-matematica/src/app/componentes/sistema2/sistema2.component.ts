@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 export class Sistema2Component {
   numero1: number = 0;
   numero2: number = 0;
-  matriz: number[][] = [[]];
-  escalar: number = 0;
-  resultado: number[][] = [];
+  matriz: (number | string)[][] = [[]];
+  escalar: number | string = 0;
+  resultado: (number | string)[][] = [];
   mostrarEscalar: boolean = false; // variável para controlar a visibilidade
 
 
@@ -26,17 +26,18 @@ export class Sistema2Component {
   }
 
   Multiplicar() {
-
     this.resultado = [];
     for (let i = 0; i < this.numero1; i++) {
       this.resultado.push([]);
       for (let j = 0; j < this.numero2; j++) {
-        this.resultado[i].push(this.matriz[i][j] * this.escalar);
+        const value = this.matriz[i][j];
+        const scalar = isNaN(parseFloat(String(this.escalar))) ? 0 : parseFloat(String(this.escalar));
+        const result = isNaN(parseFloat(String(value))) ? value : parseFloat(String(value)) * scalar;
+        this.resultado[i].push(result);
       }
     }
   }
-
-  atualizarMatriz(matriz: number[][]) {
+  atualizarMatriz(matriz: (number | string)[][]) {
     this.matriz = matriz;
   }
 
