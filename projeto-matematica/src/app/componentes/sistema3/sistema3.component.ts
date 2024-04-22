@@ -19,8 +19,11 @@ export class Sistema3Component {
   variaveis: number[]=[];
   subtracoes: number = 0
   matrizEcalonada :boolean =false;
+  calculando :boolean =false;
   multiplicador :number = 0;
+  matrizResultado: number[][] = [[]];
   matriz: number[][] = [[]];
+
   GerarMatrix() {
     this.matriz = [];
     for (let i = 0; i < this.numero1; i++) {
@@ -29,14 +32,27 @@ export class Sistema3Component {
         this.matriz[i].push(0);
       }
     }
+
     this.mostrarEscalar = true; // torna visível após gerar a matriz
   }
-  
 
-  
+
+  atualizarMatriz(matriz: number[][]) {
+    this.matriz = matriz;
+  }
+
+
 
   MetodoDeGauss()
   {
+
+    alert(this.matrizTeste);
+    // Não redefina matrizTeste aqui
+    this.matrizTeste = this.matriz.map(row => row.slice());
+    alert(this.matrizTeste);
+
+
+
     for(let i = 0;i<this.ordemx;i++)
     {
         for(let j=0;j<this.ordemy;j++)
@@ -51,20 +67,25 @@ export class Sistema3Component {
                 let aux1= this.matrizTeste[i][j];
                 let aux2= this.matrizTeste[j][j];
                 let divisor = -1*(aux1/aux2);
-                
+
                     for(let y =0 ;y < this.ordemy;y++)
                     {
                       let sub=   (this.matrizTeste[j][y]*divisor);
                       this.matrizTeste[i][y] += sub;
                       //console.log(sub,"=",this.matrizTeste[j][y],"*",divisor);
+
                     }
-                  
+
+
+
                 //console.log("mudança");
                 //console.log(aux1," ",aux2," ",divisor," ", i," ",j);
 
               }
             }
         }
+      //  alert("teste");
+       // this.atualizarMatriz(this.matrizTeste);
     }
     for(let i = 0;i<this.ordemx;i++)
       {
@@ -89,8 +110,10 @@ export class Sistema3Component {
               }
           }
       }
-
-  }                          
+      alert(this.matriz);
+      alert(this.matrizTeste);
+      this.matrizResultado = this.matrizTeste;
+  }
 
   Calcular() {
     for(let a = this.ordemx - 1 ;a>=0;a--)
@@ -108,11 +131,11 @@ export class Sistema3Component {
             }
 
           }
-          
+
           let resultado = this.matrizTeste[a][this.ordemy-1]- this.subtracoes;
           this.variaveis.push(resultado/this.multiplicador);
           console.log("sutraçoes", this.subtracoes,"resultado ", resultado);
-          
+
       }
 
     for(let v= this.ordemx-1;v>=0;v--)

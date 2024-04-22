@@ -1,27 +1,26 @@
-<p>sistema3 works!</p>
+<p>Metodo de graus</p>
 <div>
-
-      
-
 </div>
-<div>
-    <label for="numero1">Quantas incognitas?:</label>
-    <input type="number" id="numero1" [(ngModel)]="ordemx">
-  </div>
   <div>
-    <label for="numero2">Número 2:</label>
-    <input type="number" id="numero2" [(ngModel)]="numero2">
-  </div>
-  <div>
+    <div>
+      <label for="linha">Linhas:</label>
+      <input type="number" id="numero1" [(ngModel)]="numero1" >
+
+      <label for="coluna">Colunas:</label>
+      <input type="number" id="numero2" [(ngModel)]="numero2" >
+    </div>
+    <button (click)="GerarMatrix()">Gerar Matrix</button>
     <button (click)="MetodoDeGauss()">Escalonamento</button>
   </div>
   <div>
-    <button (click)="Calcular()">Calcular</button>
+    <button (click)="Calcular()" >Calcular</button>
   </div>
+
+  <app-gerador-matrix [matriz]="matriz" (matrizChange)="atualizarMatriz($event)" [adicionarMais]="true"></app-gerador-matrix>
   <div>
     <p>Resultado: {{ resultado }}</p>
   </div>
-  <app-gerador-matrix [matriz]="matrizTeste" [readonly]="false"></app-gerador-matrix>
+<app-gerador-matrix [matriz]="matrizResultado" [adicionarMais]="true" ></app-gerador-matrix>
 
-  
+
 
