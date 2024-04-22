@@ -14,6 +14,8 @@ export class Sistema2Component {
   mostrarEscalar: boolean = false; // variável para controlar a visibilidade
 
 
+
+
   GerarMatrix() {
     this.matriz = [];
     for (let i = 0; i < this.numero1; i++) {
@@ -26,16 +28,17 @@ export class Sistema2Component {
   }
 
   Multiplicar() {
-
     this.resultado = [];
     for (let i = 0; i < this.numero1; i++) {
       this.resultado.push([]);
       for (let j = 0; j < this.numero2; j++) {
-        this.resultado[i].push(this.matriz[i][j] * this.escalar);
+        const value = this.matriz[i][j];
+        const scalar = isNaN(parseFloat(String(this.escalar))) ? 0 : parseFloat(String(this.escalar));
+        const result = isNaN(parseFloat(String(value))) ? value : parseFloat(String(value)) * scalar;
+        this.resultado[i].push(result);
       }
     }
   }
-
   atualizarMatriz(matriz: number[][]) {
     this.matriz = matriz;
   }
