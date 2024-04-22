@@ -8,10 +8,12 @@ import { Component } from '@angular/core';
 export class Sistema2Component {
   numero1: number = 0;
   numero2: number = 0;
-  matriz: (number | string)[][] = [[]];
-  escalar: number | string = 0;
-  resultado: (number | string)[][] = [];
+  matriz: number[][] = [[]];
+  escalar: number = 0;
+  resultado: number[][] = [];
   mostrarEscalar: boolean = false; // variável para controlar a visibilidade
+
+
 
 
   GerarMatrix() {
@@ -37,7 +39,7 @@ export class Sistema2Component {
       }
     }
   }
-  atualizarMatriz(matriz: (number | string)[][]) {
+  atualizarMatriz(matriz: number[][]) {
     this.matriz = matriz;
   }
 

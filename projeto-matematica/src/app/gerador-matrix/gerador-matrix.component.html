@@ -1,5 +1,4 @@
-<div class="container" *ngIf="matriz.length > 0">
-  <div class="inputs">
+<div *ngIf="matriz.length > 0">
   <table>
     <caption></caption>
     <tr>
@@ -7,10 +6,13 @@
     </tr>
     <tr *ngFor="let row of matriz; let i = index">
       <td *ngFor="let col of row; let j = index">
+
         <input type="number" [value]="matriz[i][j]" (change)="atualizarValor($event, i, j)" [readonly]="readonly">
+        <ng-container *ngIf="adicionarMais && j === row.length-2 ">x{{j + 1}}=</ng-container>
+        <ng-container *ngIf="adicionarMais && j !== row.length - 1 && !(j === row.length-2)">x{{j + 1}} +</ng-container>
+
       </td>
     </tr>
 
   </table>
-</div>
 </div>
