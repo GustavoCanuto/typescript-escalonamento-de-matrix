@@ -63,7 +63,7 @@ export class Sistema3Component {
             if(i>j){
               if(this.matrizTeste[i][j]== 0)
               {
-                this.matrizEcalonada = true;
+                //this.matrizEcalonada = true;
               }
               else
               {
@@ -94,10 +94,11 @@ export class Sistema3Component {
       {
           for(let j=0;j<this.ordemy;j++)
           {
+            
             if(i>j){
               if(this.matrizTeste[i][j]!=0)
                 {
-                  
+                  this.matrizEcalonada = false;
                 }
             }
             if (this.matrizTeste[i][j]==0){
@@ -108,6 +109,10 @@ export class Sistema3Component {
           if(this.tudoZero== this.ordemy)
             {
               this.tipoDeSistema = "SPI";
+              this.matrizEcalonada= false;
+            }
+            if (this.tudoZero==this.ordemy -1 && this.matrizTeste[i][this.ordemy-1] !=0){
+              this.tipoDeSistema = "SI";
               this.matrizEcalonada= false;
             }
             this.tudoZero= 0;
