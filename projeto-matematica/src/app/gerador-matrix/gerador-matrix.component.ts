@@ -25,4 +25,5 @@ export class GeradorMatrixComponent {
     });
     this.matrizChange.emit(novaMatriz);
   }
+
 }
