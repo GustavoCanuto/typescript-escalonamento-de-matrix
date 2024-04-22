@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { Sistema1Component } from './componentes/sistema1/sistema1.component';
 import { Sistema2Component } from './componentes/sistema2/sistema2.component';
+import { Sistema3Component } from './componentes/sistema3/sistema3.component';
 import { FormsModule } from '@angular/forms';
 import { GeradorMatrixComponent } from './gerador-matrix/gerador-matrix.component';
 
@@ -15,6 +16,7 @@ import { GeradorMatrixComponent } from './gerador-matrix/gerador-matrix.componen
     MenuComponent,
     Sistema1Component,
     Sistema2Component,
+    Sistema3Component,
     GeradorMatrixComponent
   ],
   imports: [
