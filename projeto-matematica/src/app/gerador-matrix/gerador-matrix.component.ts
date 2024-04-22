@@ -6,16 +6,19 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./gerador-matrix.component.css']
 })
 export class GeradorMatrixComponent {
-  @Input() matriz: any[][] = [[]];
+  @Input() matriz: number[][] = [[]];
   @Input() readonly: boolean = false;
-  @Output() matrizChange = new EventEmitter<any[][]>();
+  @Input() adicionarMais: boolean = false; // Novo input para indicar se deve adicionar "+"
+  @Output() matrizChange = new EventEmitter<number[][]>();
 
   atualizarValor(event: Event, rowIndex: number, colIndex: number) {
     const input = event.target as HTMLInputElement;
     const valor = input.value.trim(); // Obter valor do input
+
+
     const novaMatriz = this.matriz.map((row, i) => {
       if (i === rowIndex) {
-        return row.map((col, j) => (j === colIndex ? valor : col));
+        return row.map((col, j) => (j === colIndex ? parseFloat(valor) : col));
       } else {
         return row;
       }
