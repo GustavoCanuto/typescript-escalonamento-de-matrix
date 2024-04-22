@@ -18,17 +18,20 @@ export class Sistema3Component {
                             [3,-1,1,1]];
   variaveis: number[]=[];
   subtracoes: number = 0
-  matrizEcalonada :boolean =false;
+  matrizEcalonada :boolean =true;
   calculando :boolean =false;
   multiplicador :number = 0;
   matrizResultado: number[][] = [[]];
   matriz: number[][] = [[]];
+  resultadoCalculo: string = '';
+  tipoDeSistema:string = '';
+  tudoZero: number= 0;
 
   GerarMatrix() {
     this.matriz = [];
-    for (let i = 0; i < this.numero1; i++) {
+    for (let i = 0; i < this.ordemx; i++) {
       this.matriz.push([]);
-      for (let j = 0; j < this.numero2; j++) {
+      for (let j = 0; j < this.ordemy; j++) {
         this.matriz[i].push(0);
       }
     }
@@ -46,10 +49,10 @@ export class Sistema3Component {
   MetodoDeGauss()
   {
 
-    alert(this.matrizTeste);
+    //alert(this.matrizTeste);
     // Não redefina matrizTeste aqui
     this.matrizTeste = this.matriz.map(row => row.slice());
-    alert(this.matrizTeste);
+    //alert(this.matrizTeste);
 
 
 
@@ -92,26 +95,33 @@ export class Sistema3Component {
           for(let j=0;j<this.ordemy;j++)
           {
             if(i>j){
-              if(this.matrizTeste[i][j]||0)
+              if(this.matrizTeste[i][j]!=0)
                 {
-                  this.matrizEcalonada=false;
-
+                  
                 }
             }
-            if(i==j && this.matrizTeste[i][j] == 0 )
-              {
-                 this.matrizEcalonada = false;
-                 console.log("SPI")
-              }
-            else if(i==j && this.matrizTeste[i][j] < 0 )
-              {
-                this.matrizEcalonada = false;
-                console.log("SI")
-              }
+            if (this.matrizTeste[i][j]==0){
+              this.tudoZero+=1;
+            }
+            
           }
+          if(this.tudoZero== this.ordemy)
+            {
+              this.tipoDeSistema = "SPI";
+              this.matrizEcalonada= false;
+            }
+            this.tudoZero= 0;
       }
-      alert(this.matriz);
-      alert(this.matrizTeste);
+      if(this.matrizEcalonada==true)
+        {
+          this.tipoDeSistema = "SPD";
+        }
+      else if (this.tipoDeSistema !="SPI")
+        {
+          this.tipoDeSistema = "SI";
+        }
+      //alert(this.matriz);
+      //alert(this.matrizTeste);
       this.matrizResultado = this.matrizTeste;
   }
 
@@ -137,12 +147,13 @@ export class Sistema3Component {
           console.log("sutraçoes", this.subtracoes,"resultado ", resultado);
 
       }
+      this.resultadoCalculo = '';
 
-    for(let v= this.ordemx-1;v>=0;v--)
-      {
+      this.resultadoCalculo += "Os resultados são: \n";
+      for (let v= this.ordemx-1; v>=0; v--) {
         let nomeVariavel = this.ordemx - v;
-        console.log("X",nomeVariavel," = ",this.variaveis[v]);
+        this.resultadoCalculo += `X${nomeVariavel} = ${this.variaveis[v]}\n`;
       }
-  }
+    }
 
 }
