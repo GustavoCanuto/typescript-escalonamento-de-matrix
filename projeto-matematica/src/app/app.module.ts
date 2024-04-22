@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { Sistema1Component } from './componentes/sistema1/sistema1.component';
 import { Sistema2Component } from './componentes/sistema2/sistema2.component';
+import { FormsModule } from '@angular/forms';
+import { GeradorMatrixComponent } from './gerador-matrix/gerador-matrix.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     Sistema1Component,
-    Sistema2Component
+    Sistema2Component,
+    GeradorMatrixComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
