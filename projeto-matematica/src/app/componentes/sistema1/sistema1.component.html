@@ -1,1 +1,19 @@
-<p>sistema1 works!</p>
+<div id="container">
+  <h2>Somador e Multiplicador de Matrizes</h2>
+  <div>
+      <label for="linhas">Linhas:</label>
+      <input type="number" id="rows" placeholder="Número de Linhas" min="1">
+      <label for="columns">Colunas:</label>
+      <input type="number" id="columns" placeholder="Número de Colunas" min="1">
+      <button (click)="criarInputsMatriz()">Definir tamanho</button>
+  </div>
+  <form id="matrixForm" (ngSubmit)="processarMatrizes($event)">
+      <!-- Inputs das matrizes serão gerados aqui -->
+  </form>
+  <div id="matrixOperation" style="display: none;">
+      <button (click)="somarMatrizes()">Somar Matrizes</button>
+      <button (click)="multiplicarMatrizes()">Multiplicar Matrizes</button>
+  </div>
+  <h3>Resultado:</h3>
+  <div id="result"></div>
+</div>
