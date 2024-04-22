@@ -6,10 +6,11 @@
     </tr>
     <tr *ngFor="let row of matriz; let i = index">
       <td *ngFor="let col of row; let j = index">
-        <input type="number" [value]="matriz[i][j]" (change)="atualizarValor($event, i, j)" [readonly]="readonly">
 
-        <ng-container *ngIf="adicionarMais && j !== row.length - 1">x+</ng-container>
-        <ng-container *ngIf="j === row.length - 2">=</ng-container>
+        <input type="number" [value]="matriz[i][j]" (change)="atualizarValor($event, i, j)" [readonly]="readonly">
+        <ng-container *ngIf="adicionarMais && j === row.length-2 ">x{{j + 1}}=</ng-container>
+        <ng-container *ngIf="adicionarMais && j !== row.length - 1 && !(j === row.length-2)">x{{j + 1}} +</ng-container>
+
       </td>
     </tr>
 
