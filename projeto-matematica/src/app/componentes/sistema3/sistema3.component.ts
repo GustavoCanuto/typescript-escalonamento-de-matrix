@@ -12,7 +12,7 @@ export class Sistema3Component {
   resultado: number[][] = [];
   mostrarEscalar: boolean = false; // variável para controlar a visibilidade
   ordemx: number = 3;
-  ordemy: number = this.ordemx+1;
+  ordemy: number = this.ordemx + 1;
   matrizTeste: number[][] =[[1,-1,1,1],
                             [2,1,2,0],
                             [3,-1,1,1]];
@@ -71,8 +71,22 @@ export class Sistema3Component {
           for(let j=0;j<this.ordemy;j++)
           {
             if(i>j){
-              
+              if(this.matrizTeste[i][j]||0)
+                {
+                  this.matrizEcalonada=false;
+
+                }
             }
+            if(i==j && this.matrizTeste[i][j] == 0 )
+              {
+                 this.matrizEcalonada = false;
+                 console.log("SPI")
+              }
+            else if(i==j && this.matrizTeste[i][j] < 0 )
+              {
+                this.matrizEcalonada = false;
+                console.log("SI")
+              }
           }
       }
 
