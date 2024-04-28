@@ -1,5 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
+
 @Component({
   selector: 'app-gerador-matrix',
   templateUrl: './gerador-matrix.component.html',
@@ -11,10 +14,30 @@ export class GeradorMatrixComponent {
   @Input() adicionarMais: boolean = false; // Novo input para indicar se deve adicionar "+"
   @Output() matrizChange = new EventEmitter<number[][]>();
 
+  constructor(public dialog: MatDialog) {}
+
+  openModal(rowIndex: number, colIndex: number): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: number) => {
+      if (result !== undefined) {
+        // Atualizar o valor do input clicado
+        this.matriz[rowIndex][colIndex] = result;
+        // Emitir a matriz atualizada
+        this.matrizChange.emit(this.matriz);
+      }
+    });
+  }
+
   atualizarValor(event: Event, rowIndex: number, colIndex: number) {
     const input = event.target as HTMLInputElement;
-    const valor = input.value.trim(); // Obter valor do input
+    if (!input) {
+      return;
+    }
 
+    const valor = input.value.trim(); // Obter valor do input
 
     const novaMatriz = this.matriz.map((row, i) => {
       if (i === rowIndex) {
@@ -25,5 +48,4 @@ export class GeradorMatrixComponent {
     });
     this.matrizChange.emit(novaMatriz);
   }
-
 }
