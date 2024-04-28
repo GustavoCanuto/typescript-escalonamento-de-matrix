@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalComponent } from '../../modal/modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sistema2',
@@ -14,7 +16,19 @@ export class Sistema2Component {
   mostrarEscalar: boolean = false; // variável para controlar a visibilidade
 
 
+  constructor(public dialog: MatDialog) {}
 
+  openModal(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: number) => {
+      if (result) {
+        this.escalar = result;
+      }
+    });
+  }
 
   GerarMatrix() {
     this.matriz = [];
@@ -42,6 +56,8 @@ export class Sistema2Component {
   atualizarMatriz(matriz: number[][]) {
     this.matriz = matriz;
   }
+
+
 
 
 }

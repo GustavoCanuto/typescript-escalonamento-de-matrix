@@ -9,6 +9,9 @@ import { Sistema2Component } from './componentes/sistema2/sistema2.component';
 import { Sistema3Component } from './componentes/sistema3/sistema3.component';
 import { FormsModule } from '@angular/forms';
 import { GeradorMatrixComponent } from './gerador-matrix/gerador-matrix.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ModalComponent } from './modal/modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -17,14 +20,18 @@ import { GeradorMatrixComponent } from './gerador-matrix/gerador-matrix.componen
     Sistema1Component,
     Sistema2Component,
     Sistema3Component,
-    GeradorMatrixComponent
+    GeradorMatrixComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatDialogModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
