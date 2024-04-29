@@ -35,9 +35,7 @@ export class GeradorMatrixComponent {
       }
     });
   }
-  test(){
-  alert(this.tipoInput);
-  }
+
 
   atualizarValor(event: Event, rowIndex: number, colIndex: number) {
     const input = event.target as HTMLInputElement;
@@ -47,6 +45,9 @@ export class GeradorMatrixComponent {
 
     let valor = input.value.trim(); // Obter valor do input
 
+    if (valor === null || valor === '') {
+      valor = '0';
+    }
 
     const novaMatriz = this.matriz.map((row, i) => {
       if (i === rowIndex) {

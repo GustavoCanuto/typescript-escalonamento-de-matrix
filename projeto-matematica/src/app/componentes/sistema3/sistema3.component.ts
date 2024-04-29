@@ -27,8 +27,20 @@ export class Sistema3Component {
   tipoDeSistema:string = '';
   tudoZero: number= 0;
 
+  //resultado com fracao
+  matrizResultadoComFracao: string[][] = [[]];
+
   GerarMatrix() {
     this.matriz = [];
+    this.matrizTeste = [[]];
+    this.matrizResultado = [[]];
+    this.matrizResultadoComFracao= [[]];
+    this.tipoDeSistema = '';
+    this.resultadoCalculo = '';
+    this.variaveis=[];
+    this.multiplicador = 0;
+    this.subtracoes = 0;
+
     for (let i = 0; i < this.ordemx; i++) {
       this.matriz.push([]);
       for (let j = 0; j < this.ordemy; j++) {
@@ -49,12 +61,15 @@ export class Sistema3Component {
   MetodoDeGauss()
   {
 
-    //alert(this.matrizTeste);
+    this.tipoDeSistema = '';
+    this.resultadoCalculo = '';
+    this.variaveis=[];
+    this.multiplicador = 0;
+    this.subtracoes = 0;
+    this.tudoZero = 0;
+    this.matrizEcalonada = true;
     // Não redefina matrizTeste aqui
     this.matrizTeste = this.matriz.map(row => row.slice());
-    //alert(this.matrizTeste);
-
-
 
     for(let i = 0;i<this.ordemx;i++)
     {
@@ -96,14 +111,13 @@ export class Sistema3Component {
               }
             }
         }
-      //  alert("teste");
-       // this.atualizarMatriz(this.matrizTeste);
+
     }
     for(let i = 0;i<this.ordemx;i++)
       {
           for(let j=0;j<this.ordemy;j++)
           {
-            
+
             if(i>j){
               if(this.matrizTeste[i][j]!=0)
                 {
@@ -113,7 +127,7 @@ export class Sistema3Component {
             if (this.matrizTeste[i][j]==0){
               this.tudoZero+=1;
             }
-            
+
           }
           if(this.tudoZero== this.ordemy)
             {
@@ -134,12 +148,25 @@ export class Sistema3Component {
         {
           this.tipoDeSistema = "SI";
         }
-      //alert(this.matriz);
-      //alert(this.matrizTeste);
+
       this.matrizResultado = this.matrizTeste;
+
+      //criar matriz com fracao
+      this.matrizResultadoComFracao = this.matrizTeste.map(row =>
+        row.map(value => {
+          const result = this.decimalToFraction(value);
+          return result;
+        })
+      );
+
   }
 
   Calcular() {
+    this.resultadoCalculo = '';
+    this.variaveis=[];
+    this.multiplicador = 0;
+    this.subtracoes = 0;
+
     for(let a = this.ordemx - 1 ;a>=0;a--)
       {
         for(let b = this.ordemx - 1; b >= 0;b--)
@@ -168,8 +195,39 @@ export class Sistema3Component {
       this.resultadoCalculo += "Os resultados são: \n";
       for (let v= this.ordemx-1; v>=0; v--) {
         let nomeVariavel = this.ordemx - v;
-        this.resultadoCalculo += `X${nomeVariavel} = ${this.variaveis[v]}\n`;
+        // converter para fracao o resultado
+        const resultConvertido = this.decimalToFraction(this.variaveis[v]);
+        this.resultadoCalculo += `X${nomeVariavel} = ${resultConvertido}\n`;
       }
     }
+
+    decimalToFraction(decimal: number) {
+      const tolerance = 1.0E-6;
+      const sign = Math.sign(decimal);
+      decimal = Math.abs(decimal);
+
+      let h1 = 1;
+      let h2 = 0;
+      let k1 = 0;
+      let k2 = 1;
+      let b = decimal;
+
+      do {
+          let a = Math.floor(b);
+          let aux = h1;
+          h1 = a * h1 + h2;
+          h2 = aux;
+          aux = k1;
+          k1 = a * k1 + k2;
+          k2 = aux;
+          b = 1 / (b - a);
+      } while (Math.abs(decimal - h1 / k1) > decimal * tolerance);
+
+      if (k1 === 1) {
+          return (sign === -1 ? "-" : "") + h1.toString();
+      } else {
+          return (sign === -1 ? "-" : "") + h1 + "/" + k1;
+      }
+  }
 
 }

@@ -15,13 +15,13 @@
     <button (click)="MetodoDeGauss()">Escalonamento</button>
     <button (click)="Calcular()" >Calcular</button>
   </div>
- 
+
 
   <app-gerador-matrix [matriz]="matriz" (matrizChange)="atualizarMatriz($event)" [adicionarMais]="true"></app-gerador-matrix>
   <div>
     <p>Resultado: {{ resultado }}</p>
   </div>
-<app-gerador-matrix [matriz]="matrizResultado" [adicionarMais]="true" ></app-gerador-matrix>
+<app-gerador-matrix [tipoInput]="'text'" [matriz2]="matrizResultadoComFracao" [adicionarMais]="true" ></app-gerador-matrix>
 <p>Tipo de Sistema:</p>
 <pre>{{ tipoDeSistema }}</pre>
 <p>Resultado do cálculo:</p>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalComponent } from '../../modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import Fraction from 'fraction.js';
+
 
 @Component({
   selector: 'app-sistema2',
@@ -61,13 +61,17 @@ export class Sistema2Component {
     }
   }
 
-   decimalToFraction(decimal:number) {
+  decimalToFraction(decimal: number) {
     const tolerance = 1.0E-6;
+    const sign = Math.sign(decimal);
+    decimal = Math.abs(decimal);
+
     let h1 = 1;
     let h2 = 0;
     let k1 = 0;
     let k2 = 1;
     let b = decimal;
+
     do {
         let a = Math.floor(b);
         let aux = h1;
@@ -80,10 +84,10 @@ export class Sistema2Component {
     } while (Math.abs(decimal - h1 / k1) > decimal * tolerance);
 
     if (k1 === 1) {
-      return h1.toString();
-  } else {
-      return h1 + "/" + k1;
-  }
+        return (sign === -1 ? "-" : "") + h1.toString();
+    } else {
+        return (sign === -1 ? "-" : "") + h1 + "/" + k1;
+    }
 }
 
   atualizarMatriz(matriz: number[][]) {
