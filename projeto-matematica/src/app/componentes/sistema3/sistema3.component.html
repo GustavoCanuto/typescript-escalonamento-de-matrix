@@ -1,7 +1,8 @@
+
+  <div id="container">
 <p>Metodo de Gauss</p>
 
-<div>
-</div>
+
   <div>
     <div>
       <label for="linha">Linhas:</label>
@@ -12,10 +13,9 @@
     </div>
     <button (click)="GerarMatrix()">Gerar Matrix</button>
     <button (click)="MetodoDeGauss()">Escalonamento</button>
-  </div>
-  <div>
     <button (click)="Calcular()" >Calcular</button>
   </div>
+ 
 
   <app-gerador-matrix [matriz]="matriz" (matrizChange)="atualizarMatriz($event)" [adicionarMais]="true"></app-gerador-matrix>
   <div>
@@ -26,5 +26,6 @@
 <pre>{{ tipoDeSistema }}</pre>
 <p>Resultado do cálculo:</p>
 <pre>{{ resultadoCalculo }}</pre>
+</div>
 
 

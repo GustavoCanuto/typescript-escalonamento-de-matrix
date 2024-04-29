@@ -70,19 +70,28 @@ export class Sistema3Component {
                 let aux1= this.matrizTeste[i][j];
                 let aux2= this.matrizTeste[j][j];
                 let divisor = -1*(aux1/aux2);
+                if (this.matrizTeste[j][j] == 0 && this.matrizTeste[j + 1][j] != 0) {
+                  // Troca de linha j com a próxima linha
+                  let tempRow = this.matrizTeste[j];
+                  this.matrizTeste[j] = this.matrizTeste[j + 1];
+                  this.matrizTeste[j + 1] = tempRow;
+                  console.log("tempoRow ",tempRow, this.matrizTeste[j + 1])
+                }
+                if(this.matrizTeste[i][j]!=0){
 
                     for(let y =0 ;y < this.ordemy;y++)
                     {
                       let sub=   (this.matrizTeste[j][y]*divisor);
                       this.matrizTeste[i][y] += sub;
-                      //console.log(sub,"=",this.matrizTeste[j][y],"*",divisor);
+                      console.log(sub,"=",this.matrizTeste[j][y],"*",divisor);
 
                     }
+                  }
 
 
 
-                //console.log("mudança");
-                //console.log(aux1," ",aux2," ",divisor," ", i," ",j);
+                console.log("mudança");
+                console.log(aux1," ",aux2," ",divisor," ", i," ",j);
 
               }
             }
@@ -135,13 +144,14 @@ export class Sistema3Component {
       {
         for(let b = this.ordemx - 1; b >= 0;b--)
           {
-            if(this.matrizTeste[a][b]|| 0){
+            if(this.matrizTeste[a][b]!= 0){
               if(a==b){
                 this.multiplicador = this.matrizTeste[a][b];
                 console.log("multiplicador ",this.multiplicador);
               }
               else{
                 this.subtracoes += this.matrizTeste[a][b]*this.variaveis[this.ordemx -1 - b];
+                console.log(this.matrizTeste[a][b]*this.variaveis[this.ordemx -1 - b])
               }
             }
 
@@ -150,6 +160,7 @@ export class Sistema3Component {
           let resultado = this.matrizTeste[a][this.ordemy-1]- this.subtracoes;
           this.variaveis.push(resultado/this.multiplicador);
           console.log("sutraçoes", this.subtracoes,"resultado ", resultado);
+          this.subtracoes=0;
 
       }
       this.resultadoCalculo = '';
