@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 
+
 @Component({
   selector: 'app-gerador-matrix',
   templateUrl: './gerador-matrix.component.html',
@@ -10,11 +11,15 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class GeradorMatrixComponent {
   @Input() matriz: number[][] = [[]];
+  @Input() matriz2: string[][] = [[]];
   @Input() readonly: boolean = false;
   @Input() adicionarMais: boolean = false; // Novo input para indicar se deve adicionar "+"
+  @Input() tipoInput: string = 'number'; // Novo input para o tipo de input
   @Output() matrizChange = new EventEmitter<number[][]>();
 
   constructor(public dialog: MatDialog) {}
+
+
 
   openModal(rowIndex: number, colIndex: number): void {
     const dialogRef = this.dialog.open(ModalComponent, {
@@ -30,6 +35,9 @@ export class GeradorMatrixComponent {
       }
     });
   }
+  test(){
+  alert(this.tipoInput);
+  }
 
   atualizarValor(event: Event, rowIndex: number, colIndex: number) {
     const input = event.target as HTMLInputElement;
@@ -37,7 +45,8 @@ export class GeradorMatrixComponent {
       return;
     }
 
-    const valor = input.value.trim(); // Obter valor do input
+    let valor = input.value.trim(); // Obter valor do input
+
 
     const novaMatriz = this.matriz.map((row, i) => {
       if (i === rowIndex) {
@@ -47,5 +56,7 @@ export class GeradorMatrixComponent {
       }
     });
     this.matrizChange.emit(novaMatriz);
+
+
   }
 }

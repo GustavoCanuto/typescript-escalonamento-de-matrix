@@ -12,7 +12,7 @@
 <br>
 <button (click)="GerarMatrix()">Gerar Matrix</button>
 
-<app-gerador-matrix [matriz]="matriz" (matrizChange)="atualizarMatriz($event)" [adicionarMais]="false"></app-gerador-matrix>
+<app-gerador-matrix  [matriz]="matriz" (matrizChange)="atualizarMatriz($event)" [adicionarMais]="false"></app-gerador-matrix>
 
 <div *ngIf="matriz.length > 0 && mostrarEscalar">
   <div>
@@ -25,5 +25,5 @@
   <button (click)="Multiplicar()">Multiplicar por um escalar</button>
 </div>
 
-<app-gerador-matrix [matriz]="resultado" [readonly]="true" [adicionarMais]="false"></app-gerador-matrix>
+<app-gerador-matrix [tipoInput]="'text'" [matriz2]="resultado" [readonly]="true" [adicionarMais]="false"></app-gerador-matrix>
 </div>
